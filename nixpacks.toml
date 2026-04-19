@@ -1,0 +1,5 @@
+[phases.install]
+cmds = ["pip install -e '.[web]'"]
+
+[start]
+cmd = "profsearch web --host 0.0.0.0 --port $PORT --read-only"
