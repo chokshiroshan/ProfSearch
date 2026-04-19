@@ -1,0 +1,264 @@
+{% extends "base.html" %}
+{% block title %}{{ professor.name }} — ProfSearch{% endblock %}
+
+{% block content %}
+<div class="prof-header">
+  <div class="prof-title">{{ university.name }} · {{ professor.department_type }}</div>
+  <h1>{{ professor.name }}</h1>
+  <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.35rem; align-items: center;">
+    <span class="badge badge-{{ professor.verification_status }}">{{ professor.verification_status }}</span>
+    {% if match %}
+      <span class="badge badge-{{ match.match_status }}">{{ match.match_status }}</span>
+    {% endif %}
+    {% if professor.duplicate_of_professor_id %}
+      <span class="badge badge-duplicate">duplicate</span>
+    {% endif %}
+    {% if actively_funded %}
+      <span class="badge badge-funded" title="Has at least one active grant (NIH/NSF)">actively funded</span>
+    {% elif grants %}
+      <span class="badge badge-unfunded" title="Grants found but none currently active">grants (past)</span>
+    {% endif %}
+    <button type="button" class="shortlist-toggle shortlist-toggle-header"
+            data-shortlist-toggle="{{ professor.id }}"
+            data-name="{{ professor.name }}"
+            data-university="{{ university.name }}"
+            data-department="{{ professor.department_type }}"
+            data-profile="{{ professor.profile_url or '' }}"
+            aria-pressed="false">
+      <span aria-hidden="true">★</span>
+      <span data-shortlist-label>Save</span>
+    </button>
+  </div>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-card">
+    <h3>Identity</h3>
+    <div class="detail-row">
+      <span class="detail-key">Title</span>
+      <span class="detail-val">{{ professor.title or '—' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Title (normalized)</span>
+      <span class="detail-val mono">{{ professor.title_normalized }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Email</span>
+      <span class="detail-val">{{ professor.email or '—' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Department</span>
+      <span class="detail-val">{{ professor.department_type }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Professor ID</span>
+      <span class="detail-val mono">{{ professor.id }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Candidate ID</span>
+      <span class="detail-val mono">{{ professor.candidate_id }}</span>
+    </div>
+  </div>
+
+  <div class="detail-card">
+    <h3>Sources</h3>
+    <div class="detail-row">
+      <span class="detail-key">Roster URL</span>
+      <span class="detail-val">
+        {% if professor.source_url %}
+          <a href="{{ professor.source_url }}" target="_blank" rel="noopener">{{ professor.source_url[:60] }}{% if professor.source_url|length > 60 %}…{% endif %}</a>
+        {% else %}—{% endif %}
+      </span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Profile URL</span>
+      <span class="detail-val">
+        {% if professor.profile_url %}
+          <a href="{{ professor.profile_url }}" target="_blank" rel="noopener">{{ professor.profile_url[:60] }}{% if professor.profile_url|length > 60 %}…{% endif %}</a>
+        {% else %}—{% endif %}
+      </span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Verification</span>
+      <span class="detail-val"><span class="badge badge-{{ professor.verification_status }}">{{ professor.verification_status }}</span></span>
+    </div>
+    {% if professor.duplicate_of_professor_id %}
+    <div class="detail-row">
+      <span class="detail-key">Duplicate of</span>
+      <span class="detail-val">
+        {% if duplicate_of %}
+          <a href="/professor/{{ duplicate_of.id }}">{{ duplicate_of.name }}</a>
+          <span class="muted text-xs">({{ duplicate_of.university }})</span>
+        {% else %}
+          ID {{ professor.duplicate_of_professor_id }}
+        {% endif %}
+        {% if professor.duplicate_reason %}
+          <br><span class="mono text-xs muted">{{ professor.duplicate_reason }}</span>
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="detail-card">
+    <h3>OpenAlex Match</h3>
+    {% if match %}
+    <div class="detail-row">
+      <span class="detail-key">Status</span>
+      <span class="detail-val"><span class="badge badge-{{ match.match_status }}">{{ match.match_status }}</span></span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Score</span>
+      <span class="detail-val mono">{{ '%.4f'|format(match.match_score) if match.match_score is not none else '—' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Author ID</span>
+      <span class="detail-val mono">
+        {% if match.openalex_author_id %}
+          <a href="https://openalex.org/authors/{{ match.openalex_author_id }}" target="_blank" rel="noopener">{{ match.openalex_author_id }}</a>
+        {% else %}—{% endif %}
+      </span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Matched at</span>
+      <span class="detail-val mono text-xs">{{ match.matched_at.strftime('%Y-%m-%d %H:%M') if match.matched_at else '—' }}</span>
+    </div>
+    {% if evidence.get('selected') %}
+    <div class="detail-row">
+      <span class="detail-key">Selected</span>
+      <span class="detail-val text-xs mono">{{ evidence.selected | tojson }}</span>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="detail-row">
+      <span class="detail-key">Status</span>
+      <span class="detail-val muted">No match row</span>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="detail-card">
+    <h3>Funding</h3>
+    {% if grants %}
+    <div class="detail-row">
+      <span class="detail-key">Status</span>
+      <span class="detail-val">
+        {% if actively_funded %}
+          <span class="badge badge-funded">actively funded</span>
+        {% else %}
+          <span class="badge badge-unfunded">no active grants</span>
+        {% endif %}
+      </span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-key">Grants</span>
+      <span class="detail-val">{{ grants|length }}</span>
+    </div>
+    {% if total_funding %}
+    <div class="detail-row">
+      <span class="detail-key">Total awarded</span>
+      <span class="detail-val">${{ '{:,.0f}'.format(total_funding) }}</span>
+    </div>
+    {% endif %}
+    <details class="mt-1">
+      <summary class="text-xs">Show grants</summary>
+      <ul class="grant-list">
+        {% for g in grants %}
+        <li>
+          <span class="badge badge-{{ g.source }}">{{ g.source|upper }}</span>
+          <strong>{{ g.title }}</strong>
+          {% if g.amount %} <span class="muted text-xs">${{ '{:,.0f}'.format(g.amount) }}</span> {% endif %}
+          <br><span class="text-xs muted">{{ g.start_date or '?' }} — {{ g.end_date or '?' }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% else %}
+    <div class="detail-row">
+      <span class="detail-key">Status</span>
+      <span class="detail-val muted">No grants found (run stage 7)</span>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<section class="email-draft-section">
+  <h2>Draft an outreach email</h2>
+  <p class="page-subtitle">Grounded in this professor's most recent ingested papers. Your inputs are sent only to the LLM backend you choose; ProfSearch stores nothing.</p>
+  <form class="email-draft-form"
+        hx-post="/prof/{{ professor.id }}/draft-email"
+        hx-target="#email-draft-output-{{ professor.id }}"
+        hx-indicator="#email-draft-loading-{{ professor.id }}"
+        hx-disabled-elt="find button[type=submit]">
+    <label class="filter-label" for="email-interest-{{ professor.id }}">Your research interest</label>
+    <textarea id="email-interest-{{ professor.id }}" name="interest" class="filter-select" rows="2" required
+              placeholder="e.g. post-transcriptional regulation in neurons; scaling interpretability methods to MoE models…"></textarea>
+
+    <div class="email-draft-row">
+      <div class="email-draft-field">
+        <label class="filter-label" for="email-name-{{ professor.id }}">Your name</label>
+        <input id="email-name-{{ professor.id }}" name="applicant_name" class="filter-select" type="text" placeholder="e.g. Jordan Lee">
+      </div>
+      <div class="email-draft-field">
+        <label class="filter-label" for="email-stage-{{ professor.id }}">Stage</label>
+        <select id="email-stage-{{ professor.id }}" name="stage" class="filter-select">
+          <option value="phd">PhD applicant</option>
+          <option value="postdoc">Postdoc applicant</option>
+        </select>
+      </div>
+      <div class="email-draft-field">
+        <label class="filter-label" for="email-backend-{{ professor.id }}">LLM backend</label>
+        <select id="email-backend-{{ professor.id }}" name="llm_backend" class="filter-select">
+          <option value="">Default (env)</option>
+          <option value="anthropic">Anthropic</option>
+          <option value="fake">Fake (no key)</option>
+          <option value="echo">Echo (debug prompt)</option>
+        </select>
+      </div>
+    </div>
+
+    <label class="filter-label" for="email-bg-{{ professor.id }}">Background (optional)</label>
+    <input id="email-bg-{{ professor.id }}" name="background" class="filter-select" type="text"
+           placeholder="e.g. final-year undergrad at NUS, 2 years in Prof X's lab on…">
+
+    <div class="email-draft-actions">
+      <button type="submit" class="btn btn-primary">Draft email</button>
+      <span id="email-draft-loading-{{ professor.id }}" class="htmx-indicator mono text-xs muted">Drafting<span class="loading-dots"></span></span>
+    </div>
+  </form>
+  <div id="email-draft-output-{{ professor.id }}"></div>
+</section>
+
+<h2>Works ({{ works|length }})</h2>
+{% if works %}
+<table class="works-table mt-1">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Title</th>
+      <th>Source</th>
+      <th>Cited</th>
+      <th>Position</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for work, pw in works %}
+    <tr>
+      <td class="work-year">{{ work.publication_year or '—' }}</td>
+      <td class="work-title">
+        {{ work.title }}
+        {% if work.doi %}
+          <a href="https://doi.org/{{ work.doi }}" target="_blank" rel="noopener" class="text-xs muted" style="margin-left: 0.3rem;">DOI</a>
+        {% endif %}
+      </td>
+      <td class="work-source" title="{{ work.source_name or '' }}">{{ work.source_name or '—' }}</td>
+      <td class="work-citations">{{ work.cited_by_count if work.cited_by_count is not none else '—' }}</td>
+      <td class="mono text-xs">{{ pw.authorship_position }}{% if pw.is_corresponding %} *{% endif %}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="empty-state mt-2">No works ingested for this professor.</div>
+{% endif %}
+{% endblock %}

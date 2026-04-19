@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ProfSearch{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+  <script defer src="/static/shortlist.js"></script>
+  <script defer src="/static/search-state.js"></script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <nav class="topnav" hx-boost="true" hx-target="#main-content" hx-select="#main-content" hx-swap="innerHTML" hx-push-url="true">
+    <a href="/" class="topnav-brand">Prof<span class="brand-accent">Search</span></a>
+    <div class="topnav-links">
+      <a href="/" class="{% if active_page == 'search' %}active{% endif %}">Search</a>
+      <a href="/compare" class="{% if active_page == 'compare' %}active{% endif %}">Compare</a>
+      <a href="/pipeline" class="{% if active_page == 'pipeline' %}active{% endif %}">Pipeline</a>
+    </div>
+  </nav>
+  <main>
+    <div id="main-content">
+    {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <aside id="shortlist-panel" class="shortlist-panel" aria-label="Saved professors"
+         hx-boost="true" hx-target="#main-content" hx-select="#main-content" hx-swap="innerHTML" hx-push-url="true">
+    <header class="shortlist-head">
+      <span class="shortlist-title">Shortlist <span class="shortlist-badge" data-shortlist-count>0</span></span>
+      <div class="shortlist-head-actions">
+        <button type="button" class="btn btn-ghost btn-xs" data-shortlist-compare>Compare</button>
+        <button type="button" class="btn btn-ghost btn-xs" data-shortlist-export>Export CSV</button>
+      </div>
+    </header>
+    <div class="shortlist-body" data-shortlist-body></div>
+    <footer class="shortlist-foot">
+      <span class="muted text-xs">Saved locally in your browser. Nothing leaves this device.</span>
+    </footer>
+  </aside>
+
+  <footer class="site-footer">
+    <span>ProfSearch · open-source research-fit scout</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}{% if query %}{{ query }} — {% endif %}ProfSearch{% endblock %}
+
+{% block content %}
+<h1>Search</h1>
+<p class="page-subtitle">Query is matched against works, then aggregated up to professors.</p>
+
+<form id="search-form"
+      hx-get="/"
+      hx-select="#results > *"
+      hx-target="#results"
+      hx-indicator="#search-loading, #results"
+      hx-push-url="true"
+      hx-disabled-elt=".search-submit">
+  <div class="search-bar">
+    <input type="search" name="q" value="{{ query }}" class="search-input"
+           placeholder="e.g. quantum materials, topological insulators…"
+           autocomplete="off" autofocus>
+    <button type="submit" class="btn btn-primary search-submit">Search</button>
+  </div>
+  {# Hidden filter values are included with every search submission #}
+  <input type="hidden" name="university" id="hf-university" value="{{ selected_university }}">
+  <input type="hidden" name="department_type" id="hf-department_type" value="{{ selected_department_type }}">
+  <input type="hidden" name="verification" id="hf-verification" value="{{ selected_verification }}">
+  <input type="hidden" name="match_status" id="hf-match_status" value="{{ selected_match_status }}">
+</form>
+
+<div class="search-layout">
+  <aside class="filter-panel">
+    <h3>Filters</h3>
+
+    <div class="filter-group">
+      <label class="filter-label" for="f-university">University</label>
+      <select id="f-university" class="filter-select"
+              onchange="document.getElementById('hf-university').value=this.value; htmx.trigger('#search-form','submit')">
+        <option value="">All</option>
+        {% for uni in filters.universities %}
+          <option value="{{ uni }}" {% if uni == selected_university %}selected{% endif %}>{{ uni }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="f-dept">Department</label>
+      <select id="f-dept" class="filter-select"
+              onchange="document.getElementById('hf-department_type').value=this.value; htmx.trigger('#search-form','submit')">
+        <option value="">All</option>
+        {% for dt in filters.department_types %}
+          <option value="{{ dt }}" {% if dt == selected_department_type %}selected{% endif %}>{{ dt }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="f-verification">Verification</label>
+      <select id="f-verification" class="filter-select"
+              onchange="document.getElementById('hf-verification').value=this.value; htmx.trigger('#search-form','submit')">
+        <option value="">All</option>
+        <option value="verified" {% if selected_verification == 'verified' %}selected{% endif %}>Verified</option>
+        <option value="ambiguous" {% if selected_verification == 'ambiguous' %}selected{% endif %}>Ambiguous</option>
+        <option value="excluded" {% if selected_verification == 'excluded' %}selected{% endif %}>Excluded</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label" for="f-match">Match status</label>
+      <select id="f-match" class="filter-select"
+              onchange="document.getElementById('hf-match_status').value=this.value; htmx.trigger('#search-form','submit')">
+        <option value="">All</option>
+        <option value="matched" {% if selected_match_status == 'matched' %}selected{% endif %}>Matched</option>
+        <option value="ambiguous" {% if selected_match_status == 'ambiguous' %}selected{% endif %}>Ambiguous</option>
+        <option value="unmatched" {% if selected_match_status == 'unmatched' %}selected{% endif %}>Unmatched</option>
+      </select>
+    </div>
+  </aside>
+
+  <div>
+    <span id="search-loading" class="htmx-indicator mono text-xs muted">Searching<span class="loading-dots"></span></span>
+    <div id="results" class="htmx-hide-on-request"
+         hx-boost="true" hx-target="#main-content" hx-select="#main-content" hx-swap="innerHTML" hx-push-url="true">
+      {% if query %}
+        {% include "partials/search_results.html" %}
+      {% else %}
+        <div class="empty-state">Enter a query to search across {{ filters.universities|length }} universities.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

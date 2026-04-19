@@ -1,0 +1,36 @@
+<table class="works-table">
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Title</th>
+      <th>Source</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for work in works %}
+    <tr>
+      <td class="work-year">{{ work.publication_year or '—' }}</td>
+      <td class="work-title">
+        {{ work.title }}
+        {% if work.doi %}
+          <a href="https://doi.org/{{ work.doi }}" target="_blank" rel="noopener" class="text-xs muted" style="margin-left: 0.25rem;">DOI</a>
+        {% endif %}
+      </td>
+      <td class="work-source" title="{{ work.source_name or '' }}">{{ work.source_name or '—' }}</td>
+      <td class="work-score">{{ '%.4f'|format(work.score) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if offset + limit < total %}
+<button class="works-toggle"
+        hx-get="/search/works/{{ professor_id }}?q={{ query|urlencode }}&offset={{ offset + limit }}&limit={{ limit }}"
+        hx-target="closest .works-section"
+        hx-swap="innerHTML">
+  Load more ({{ total - offset - limit }} remaining)
+</button>
+{% endif %}
+<span class="mono text-xs muted mt-1" style="display: block;">
+  Showing {{ works|length }} of {{ total }} ranked works
+</span>

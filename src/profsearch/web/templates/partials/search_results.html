@@ -1,0 +1,65 @@
+{% if hits %}
+<div class="results-header">
+  {{ hits|length }} professor{{ 's' if hits|length != 1 else '' }} for "{{ query }}"
+</div>
+{% for hit in hits %}
+<div class="result-card">
+  <span class="result-rank">#{{ loop.index }}</span>
+  <button type="button" class="shortlist-toggle"
+          data-shortlist-toggle="{{ hit.professor_id }}"
+          data-name="{{ hit.professor_name }}"
+          data-university="{{ hit.university_name }}"
+          aria-pressed="false"
+          title="Save to shortlist">
+    <span aria-hidden="true">★</span>
+    <span data-shortlist-label>Save</span>
+  </button>
+  <div class="result-name">
+    <a href="/professor/{{ hit.professor_id }}">{{ hit.professor_name }}</a>
+  </div>
+  <div class="result-meta">
+    <span>{{ hit.university_name }}</span>
+    <span class="result-score">
+      {{ '%.4f'|format(hit.score) }}
+      <span class="score-bar-track"><span class="score-bar-fill" style="width: {{ (hit.score * 100)|round|int }}%"></span></span>
+    </span>
+    <span>{{ hit.total_work_count }} work{{ 's' if hit.total_work_count != 1 else '' }}</span>
+  </div>
+
+  <div class="works-section" id="works-{{ hit.professor_id }}">
+    <table class="works-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Source</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for work in hit.supporting_works[:default_work_display] %}
+        <tr>
+          <td class="work-year">{{ work.publication_year or '—' }}</td>
+          <td class="work-title">
+            {{ work.title }}
+            {% if work.doi %}
+              <a href="https://doi.org/{{ work.doi }}" target="_blank" rel="noopener" class="text-xs muted" style="margin-left: 0.25rem;">DOI</a>
+            {% endif %}
+          </td>
+          <td class="work-source" title="{{ work.source_name or '' }}">{{ work.source_name or '—' }}</td>
+          <td class="work-score">{{ '%.4f'|format(work.score) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if hit.total_work_count > default_work_display %}
+    <a class="works-toggle" href="/professor/{{ hit.professor_id }}">
+      Show all {{ hit.total_work_count }} ranked works
+    </a>
+    {% endif %}
+  </div>
+</div>
+{% endfor %}
+{% elif query %}
+<div class="empty-state">No results found for "{{ query }}".</div>
+{% endif %}

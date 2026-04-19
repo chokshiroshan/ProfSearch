@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Compare — ProfSearch{% endblock %}
+
+{% block content %}
+<h1>Compare</h1>
+<p class="page-subtitle">Side-by-side view of up to {{ max_compare }} professors from your shortlist.</p>
+
+{% if not columns %}
+<div class="empty-state">
+  No professors to compare. Add professors to your shortlist from the search results or a professor page, then click "Compare selected" in the shortlist panel.
+</div>
+{% else %}
+<div class="compare-grid" style="--cols: {{ columns|length }}">
+  {% for col in columns %}
+  <div class="compare-col">
+    <div class="compare-head">
+      <div class="compare-uni">{{ col.university.name }} · {{ col.professor.department_type }}</div>
+      <h2 class="compare-name"><a href="/professor/{{ col.professor.id }}">{{ col.professor.name }}</a></h2>
+      <div class="compare-badges">
+        <span class="badge badge-{{ col.professor.verification_status }}">{{ col.professor.verification_status }}</span>
+        {% if col.match %}
+          <span class="badge badge-{{ col.match.match_status }}">{{ col.match.match_status }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <dl class="compare-facts">
+      <dt>Title</dt><dd>{{ col.professor.title or '—' }}</dd>
+      <dt>Email</dt><dd>{{ col.professor.email or '—' }}</dd>
+      <dt>Match score</dt>
+      <dd class="mono">{{ '%.3f'|format(col.match.match_score) if col.match and col.match.match_score is not none else '—' }}</dd>
+      <dt>Profile</dt>
+      <dd>
+        {% if col.professor.profile_url %}
+          <a href="{{ col.professor.profile_url }}" target="_blank" rel="noopener">homepage ↗</a>
+        {% else %}—{% endif %}
+      </dd>
+    </dl>
+
+    <div class="compare-works">
+      <h3>Recent works</h3>
+      {% if col.recent_works %}
+      <ul>
+        {% for work in col.recent_works %}
+        <li>
+          <span class="mono text-xs muted">{{ work.publication_year or '—' }}</span>
+          {{ work.title }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <div class="muted text-xs">No works ingested.</div>
+      {% endif %}
+    </div>
+
+    <div class="compare-actions">
+      <button class="btn btn-ghost" data-shortlist-remove="{{ col.professor.id }}">Remove from shortlist</button>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

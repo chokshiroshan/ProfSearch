@@ -1,0 +1,35 @@
+<div class="email-draft-result">
+  <div class="email-draft-meta">
+    <span class="badge badge-matched">{{ drafted.backend }} · {{ drafted.model }}</span>
+    <button type="button" class="btn btn-ghost btn-xs" data-copy-target="email-draft-body-{{ professor_id }}">Copy to clipboard</button>
+  </div>
+  <textarea id="email-draft-body-{{ professor_id }}" class="email-draft-body" rows="14" spellcheck="false">{{ drafted.body }}</textarea>
+  <details class="email-draft-refs">
+    <summary>Grounded in {{ drafted.referenced_works|length }} recent paper{{ 's' if drafted.referenced_works|length != 1 else '' }}</summary>
+    <ul>
+      {% for work in drafted.referenced_works %}
+      <li>
+        <span class="mono text-xs muted">{{ work.year or 'n/a' }}</span>
+        {{ work.title }}
+        {% if work.doi %}
+          <a href="https://doi.org/{{ work.doi }}" target="_blank" rel="noopener" class="text-xs muted">DOI</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </details>
+</div>
+<script>
+  (function () {
+    var btn = document.querySelector('[data-copy-target="email-draft-body-{{ professor_id }}"]');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var ta = document.getElementById('email-draft-body-{{ professor_id }}');
+      if (!ta) return;
+      ta.select();
+      try { document.execCommand('copy'); } catch (_e) {}
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy to clipboard'; }, 1500);
+    });
+  })();
+</script>

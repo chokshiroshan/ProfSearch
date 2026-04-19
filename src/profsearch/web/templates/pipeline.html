@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Pipeline — ProfSearch{% endblock %}
+
+{% block content %}
+<h1>Pipeline Status</h1>
+<p class="page-subtitle">Current state of the ingestion pipeline and database counts.</p>
+
+<div class="counts-grid">
+  <div class="count-card">
+    <div class="count-value">{{ counts.universities }}</div>
+    <div class="count-label">Universities</div>
+  </div>
+  <div class="count-card">
+    <div class="count-value">{{ counts.faculty_candidates }}</div>
+    <div class="count-label">Candidates</div>
+  </div>
+  <div class="count-card">
+    <div class="count-value">{{ counts.verified }}</div>
+    <div class="count-label">Verified Profs</div>
+  </div>
+  <div class="count-card">
+    <div class="count-value">{{ counts.duplicates }}</div>
+    <div class="count-label">Duplicates</div>
+  </div>
+  <div class="count-card">
+    <div class="count-value">{{ counts.matched }}</div>
+    <div class="count-label">Matched Authors</div>
+  </div>
+  <div class="count-card">
+    <div class="count-value">{{ counts.works }}</div>
+    <div class="count-label">Works</div>
+  </div>
+</div>
+
+<h2>Stages</h2>
+<table class="pipeline-table">
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Status</th>
+      <th>Progress</th>
+      <th>Started</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for stage in stages %}
+    <tr>
+      <td class="stage-name">{{ stage.name }}</td>
+      <td><span class="badge badge-{{ stage.status }}">{{ stage.status }}</span></td>
+      <td class="progress-cell">
+        {% if stage.total > 0 %}
+          {{ stage.processed }}/{{ stage.total }}
+        {% else %}
+          &mdash;
+        {% endif %}
+      </td>
+      <td class="timestamp">{{ stage.started_at.strftime('%Y-%m-%d %H:%M') if stage.started_at else '—' }}</td>
+      <td class="timestamp">{{ stage.completed_at.strftime('%Y-%m-%d %H:%M') if stage.completed_at else '—' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

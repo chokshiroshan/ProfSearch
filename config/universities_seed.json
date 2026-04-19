@@ -1,0 +1,565 @@
+[
+  {
+    "name": "Massachusetts Institute of Technology",
+    "short_name": "MIT",
+    "qs_rank_2026": 1,
+    "qs_score": 98.8,
+    "domain": "mit.edu",
+    "openalex_id": "https://openalex.org/I63966007",
+    "ror_id": "https://ror.org/042nb2s44",
+    "state": "Massachusetts",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.mit.edu/faculty/",
+        "parser_hint": "mit_faculty_cards"
+      },
+      {
+        "department_type": "materials_science",
+        "roster_url": "https://dmse.mit.edu/people/faculty/",
+        "parser_hint": "mit_dmse_cards"
+      }
+    ]
+  },
+  {
+    "name": "Stanford University",
+    "short_name": "Stanford",
+    "qs_rank_2026": 4,
+    "qs_score": 94.7,
+    "domain": "stanford.edu",
+    "openalex_id": "https://openalex.org/I97018004",
+    "ror_id": "https://ror.org/00f54p054",
+    "state": "California",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.stanford.edu/people/faculty",
+        "parser_hint": "stanford_hb_cards"
+      },
+      {
+        "department_type": "applied_physics",
+        "roster_url": "https://appliedphysics.stanford.edu/people/faculty",
+        "parser_hint": "stanford_hb_cards"
+      },
+      {
+        "department_type": "materials_science",
+        "roster_url": "https://mse.stanford.edu/people/faculty",
+        "parser_hint": "stanford_hb_cards"
+      }
+    ]
+  },
+  {
+    "name": "University of California, Berkeley",
+    "short_name": "UC Berkeley",
+    "qs_rank_2026": 6,
+    "qs_score": 93.5,
+    "domain": "berkeley.edu",
+    "openalex_id": "https://openalex.org/I95457486",
+    "ror_id": "https://ror.org/01an7q238",
+    "state": "California",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.berkeley.edu/people/faculty",
+        "parser_hint": "berkeley_people_table"
+      },
+      {
+        "department_type": "astronomy",
+        "roster_url": "https://astro.berkeley.edu/people/faculty",
+        "parser_hint": "berkeley_people_table"
+      }
+    ]
+  },
+  {
+    "name": "California Institute of Technology (Caltech)",
+    "short_name": "Caltech",
+    "qs_rank_2026": 7,
+    "qs_score": 91.8,
+    "domain": "caltech.edu",
+    "openalex_id": "https://openalex.org/I122411786",
+    "ror_id": "https://ror.org/05dxps055",
+    "state": "California",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://www.pma.caltech.edu/people?cat_one=Professorial+Faculty&cat_two=Physics",
+        "parser_hint": "caltech_people_listing"
+      }
+    ]
+  },
+  {
+    "name": "Harvard University",
+    "short_name": "Harvard",
+    "qs_rank_2026": 2,
+    "qs_score": 96.6,
+    "domain": "harvard.edu",
+    "openalex_id": "https://openalex.org/I136199984",
+    "ror_id": "https://ror.org/03vek6s52",
+    "state": "Massachusetts",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://www.physics.harvard.edu/people/faculty"
+      }
+    ]
+  },
+  {
+    "name": "Princeton University",
+    "short_name": "Princeton",
+    "qs_rank_2026": 10,
+    "qs_score": 89.7,
+    "domain": "princeton.edu",
+    "openalex_id": "https://openalex.org/I20089843",
+    "ror_id": "https://ror.org/00hx57361",
+    "state": "New Jersey",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://phy.princeton.edu/people/faculty",
+        "parser_hint": "princeton_content_list"
+      }
+    ]
+  },
+  {
+    "name": "University of California, Los Angeles",
+    "short_name": "UCLA",
+    "qs_rank_2026": 16,
+    "qs_score": 85.9,
+    "domain": "ucla.edu",
+    "openalex_id": "https://openalex.org/I161318765",
+    "ror_id": "https://ror.org/046rm7j60",
+    "state": "California",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://pa.ucla.edu/faculty.html",
+        "parser_hint": "ucla_faculty_table"
+      }
+    ]
+  },
+  {
+    "name": "University of Chicago",
+    "short_name": "UChicago",
+    "qs_rank_2026": 18,
+    "qs_score": 84.7,
+    "domain": "uchicago.edu",
+    "openalex_id": "https://openalex.org/I40347166",
+    "ror_id": "https://ror.org/024mw5h28",
+    "state": "Illinois",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.uchicago.edu/people/",
+        "parser_hint": "uchicago_people_list"
+      }
+    ]
+  },
+  {
+    "name": "Cornell University",
+    "short_name": "Cornell",
+    "qs_rank_2026": 19,
+    "qs_score": 83.8,
+    "domain": "cornell.edu",
+    "openalex_id": "https://openalex.org/I205783295",
+    "ror_id": "https://ror.org/05bnh6r87",
+    "state": "New York",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.cornell.edu/faculty"
+      }
+    ]
+  },
+  {
+    "name": "University of Illinois Urbana-Champaign",
+    "short_name": "UIUC",
+    "qs_rank_2026": 29,
+    "qs_score": 81.9,
+    "domain": "illinois.edu",
+    "openalex_id": "https://openalex.org/I157725225",
+    "ror_id": "https://ror.org/047426m28",
+    "state": "Illinois",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.illinois.edu/people/directory/faculty"
+      }
+    ]
+  },
+  {
+    "name": "Yale University",
+    "short_name": "Yale",
+    "qs_rank_2026": 22,
+    "qs_score": 83.1,
+    "domain": "yale.edu",
+    "openalex_id": "https://openalex.org/I32971472",
+    "ror_id": "https://ror.org/03v76x132",
+    "state": "Connecticut",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.yale.edu/people/faculty",
+        "parser_hint": "yale_people_table"
+      }
+    ]
+  },
+  {
+    "name": "University of California, Santa Barbara (UCSB)",
+    "short_name": "UCSB",
+    "qs_rank_2026": 23,
+    "qs_score": 83.0,
+    "domain": "ucsb.edu",
+    "openalex_id": "https://openalex.org/I154570441",
+    "ror_id": "https://ror.org/02t274463",
+    "state": "California",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://www.physics.ucsb.edu/people/faculty",
+        "parser_hint": "ucsb_directory_rows"
+      }
+    ]
+  },
+  {
+    "name": "University of Pennsylvania",
+    "short_name": "Penn",
+    "qs_rank_2026": 48,
+    "qs_score": 78.1,
+    "domain": "upenn.edu",
+    "openalex_id": "https://openalex.org/I79576946",
+    "ror_id": "https://ror.org/00b30xv10",
+    "state": "Pennsylvania",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://www.physics.upenn.edu/people/standing-faculty",
+        "parser_hint": "penn_people_rows"
+      }
+    ]
+  },
+  {
+    "name": "University of Maryland, College Park",
+    "short_name": "UMD",
+    "qs_rank_2026": 41,
+    "qs_score": 79.5,
+    "domain": "umd.edu",
+    "openalex_id": "https://openalex.org/I66946132",
+    "ror_id": "https://ror.org/047s2c258",
+    "state": "Maryland",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://umdphysics.umd.edu/people/faculty.html",
+        "parser_hint": "umd_k2_faculty"
+      }
+    ]
+  },
+  {
+    "name": "University of Washington",
+    "short_name": "UW",
+    "qs_rank_2026": 50,
+    "qs_score": 77.9,
+    "domain": "washington.edu",
+    "openalex_id": "https://openalex.org/I201448701",
+    "ror_id": "https://ror.org/00cvxb145",
+    "state": "Washington",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://phys.washington.edu/people/faculty",
+        "parser_hint": "washington_views_rows"
+      }
+    ]
+  },
+  {
+    "name": "Georgia Institute of Technology",
+    "short_name": "Georgia Tech",
+    "qs_rank_2026": 53,
+    "qs_score": 77.5,
+    "domain": "gatech.edu",
+    "openalex_id": "https://openalex.org/I130701444",
+    "ror_id": "https://ror.org/01zkghx44",
+    "state": "Georgia",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.gatech.edu/people/professors",
+        "parser_hint": "gatech_people_grid"
+      }
+    ]
+  },
+  {
+    "name": "Northwestern University",
+    "short_name": "Northwestern",
+    "qs_rank_2026": 76,
+    "qs_score": 74.8,
+    "domain": "northwestern.edu",
+    "openalex_id": "https://openalex.org/I111979921",
+    "ror_id": "https://ror.org/000e0be47",
+    "state": "Illinois",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://physics.northwestern.edu/people/faculty/core-faculty/",
+        "parser_hint": "northwestern_people_articles"
+      }
+    ]
+  },
+  {
+    "name": "University of Wisconsin-Madison",
+    "short_name": "Wisconsin",
+    "qs_rank_2026": 100,
+    "qs_score": 72.8,
+    "domain": "wisc.edu",
+    "openalex_id": "https://openalex.org/I135310074",
+    "ror_id": "https://ror.org/01y2jtd41",
+    "state": "Wisconsin",
+    "departments": [
+      {
+        "department_type": "physics",
+        "roster_url": "https://www.physics.wisc.edu/people/faculty/",
+        "parser_hint": "wisc_faculty_cards"
+      }
+    ]
+  },
+  {
+    "name": "Columbia University",
+    "short_name": "Columbia",
+    "qs_rank_2026": 23,
+    "qs_score": 83.0,
+    "domain": "columbia.edu",
+    "openalex_id": "https://openalex.org/I78577930",
+    "ror_id": "https://ror.org/00hj8s172",
+    "state": "New York",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "The University of Texas at Austin",
+    "short_name": "UT Austin",
+    "qs_rank_2026": 31,
+    "qs_score": 80.7,
+    "domain": "utexas.edu",
+    "openalex_id": "https://openalex.org/I86519309",
+    "ror_id": "https://ror.org/00hj54h04",
+    "state": "Texas",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "University of Michigan",
+    "short_name": "Michigan",
+    "qs_rank_2026": 34,
+    "qs_score": 80.5,
+    "domain": "umich.edu",
+    "openalex_id": "https://openalex.org/I27837315",
+    "ror_id": "https://ror.org/00jmfr291",
+    "state": "Michigan",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "University of California, San Diego",
+    "short_name": "UCSD",
+    "qs_rank_2026": 37,
+    "qs_score": 79.9,
+    "domain": "ucsd.edu",
+    "openalex_id": "https://openalex.org/I36258959",
+    "ror_id": "https://ror.org/0168r3w48",
+    "state": "California",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "University of Colorado Boulder",
+    "short_name": "Colorado",
+    "qs_rank_2026": 57,
+    "qs_score": 76.5,
+    "domain": "colorado.edu",
+    "openalex_id": "https://openalex.org/I188538660",
+    "ror_id": "https://ror.org/02ttsq026",
+    "state": "Colorado",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Pennsylvania State University",
+    "short_name": "Penn State",
+    "qs_rank_2026": 61,
+    "qs_score": 76.2,
+    "domain": "psu.edu",
+    "openalex_id": "https://openalex.org/I130769515",
+    "ror_id": "https://ror.org/04p491231",
+    "state": "Pennsylvania",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Johns Hopkins University",
+    "short_name": "Johns Hopkins",
+    "qs_rank_2026": 64,
+    "qs_score": 76.0,
+    "domain": "jhu.edu",
+    "openalex_id": "https://openalex.org/I145311948",
+    "ror_id": "https://ror.org/00za53h95",
+    "state": "Maryland",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Purdue University",
+    "short_name": "Purdue",
+    "qs_rank_2026": 71,
+    "qs_score": 75.4,
+    "domain": "purdue.edu",
+    "openalex_id": "https://openalex.org/I219193219",
+    "ror_id": "https://ror.org/02dqehb95",
+    "state": "Indiana",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Stony Brook University",
+    "short_name": "Stony Brook",
+    "qs_rank_2026": 85,
+    "qs_score": 74.0,
+    "domain": "stonybrook.edu",
+    "openalex_id": "https://openalex.org/I59553526",
+    "ror_id": "https://ror.org/05qghxh33",
+    "state": "New York",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Carnegie Mellon University",
+    "short_name": "Carnegie Mellon",
+    "qs_rank_2026": 93,
+    "qs_score": 73.5,
+    "domain": "cmu.edu",
+    "openalex_id": "https://openalex.org/I74973139",
+    "ror_id": "https://ror.org/05x2bcf33",
+    "state": "Pennsylvania",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Michigan State University",
+    "short_name": "Michigan State",
+    "qs_rank_2026": 95,
+    "qs_score": 73.2,
+    "domain": "msu.edu",
+    "openalex_id": "https://openalex.org/I87216513",
+    "ror_id": "https://ror.org/05hs6h993",
+    "state": "Michigan",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Rice University",
+    "short_name": "Rice",
+    "qs_rank_2026": 96,
+    "qs_score": 73.1,
+    "domain": "rice.edu",
+    "openalex_id": "https://openalex.org/I74775410",
+    "ror_id": "https://ror.org/008zs3103",
+    "state": "Texas",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Boston University",
+    "short_name": "BU",
+    "qs_rank_2026": 98,
+    "qs_score": 72.9,
+    "domain": "bu.edu",
+    "openalex_id": "https://openalex.org/I111088046",
+    "ror_id": "https://ror.org/05qwgg493",
+    "state": "Massachusetts",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "University of Arizona",
+    "short_name": "Arizona",
+    "qs_rank_2026": 100,
+    "qs_score": 72.8,
+    "domain": "arizona.edu",
+    "openalex_id": "https://openalex.org/I138006243",
+    "ror_id": "https://ror.org/03m2x1q45",
+    "state": "Arizona",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "New York University",
+    "short_name": "NYU",
+    "qs_rank_2026": 103,
+    "qs_score": 72.7,
+    "domain": "nyu.edu",
+    "openalex_id": "https://openalex.org/I57206974",
+    "ror_id": "https://ror.org/0190ak572",
+    "state": "New York",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Texas A&M University",
+    "short_name": "Texas A&M",
+    "qs_rank_2026": 124,
+    "qs_score": 71.1,
+    "domain": "tamu.edu",
+    "openalex_id": "https://openalex.org/I91045830",
+    "ror_id": "https://ror.org/01f5ytq51",
+    "state": "Texas",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "The Ohio State University",
+    "short_name": "Ohio State",
+    "qs_rank_2026": 126,
+    "qs_score": 71.0,
+    "domain": "osu.edu",
+    "openalex_id": "https://openalex.org/I52357470",
+    "ror_id": "https://ror.org/00rs6vg23",
+    "state": "Ohio",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Duke University",
+    "short_name": "Duke",
+    "qs_rank_2026": 128,
+    "qs_score": 70.9,
+    "domain": "duke.edu",
+    "openalex_id": "https://openalex.org/I170897317",
+    "ror_id": "https://ror.org/00py81415",
+    "state": "North Carolina",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "University of Rochester",
+    "short_name": "Rochester",
+    "qs_rank_2026": 134,
+    "qs_score": 70.6,
+    "domain": "rochester.edu",
+    "openalex_id": "https://openalex.org/I5388228",
+    "ror_id": "https://ror.org/022kthw22",
+    "state": "New York",
+    "seed_status": "ranking_only",
+    "departments": []
+  },
+  {
+    "name": "Brown University",
+    "short_name": "Brown",
+    "qs_rank_2026": 137,
+    "qs_score": 70.4,
+    "domain": "brown.edu",
+    "openalex_id": "https://openalex.org/I27804330",
+    "ror_id": "https://ror.org/05gq02987",
+    "state": "Rhode Island",
+    "seed_status": "ranking_only",
+    "departments": []
+  }
+]

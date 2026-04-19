@@ -1,0 +1,17 @@
+.env
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.venv/
+venv/
+.profsearch/
+build/
+dist/
+*.egg-info/
+data/
+runs/
+.playwright-mcp/
+.claude/

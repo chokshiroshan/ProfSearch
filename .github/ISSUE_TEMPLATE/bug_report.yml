@@ -1,0 +1,29 @@
+name: Bug Report
+description: Report a problem with ProfSearch
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened
+      description: Describe the issue and what you expected instead
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Commands you ran and their output
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: "Python version, OS, and `profsearch doctor --json-output` output if available"
+      placeholder: |
+        Python: 3.12.0
+        OS: macOS 14.0
+        ProfSearch version: 0.1.0
+    validations:
+      required: false

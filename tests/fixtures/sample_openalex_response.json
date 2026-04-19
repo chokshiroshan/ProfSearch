@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "id": "https://openalex.org/A123",
+      "display_name": "Jane Doe",
+      "last_known_institutions": [
+        {
+          "id": "https://openalex.org/I123"
+        }
+      ],
+      "x_concepts": [
+        {
+          "display_name": "Physics"
+        }
+      ],
+      "counts_by_year": [
+        {
+          "year": 2025,
+          "works_count": 6
+        }
+      ]
+    },
+    {
+      "id": "https://openalex.org/A456",
+      "display_name": "Jane D. Doe",
+      "last_known_institutions": [
+        {
+          "id": "https://openalex.org/I999"
+        }
+      ],
+      "x_concepts": [
+        {
+          "display_name": "History"
+        }
+      ],
+      "counts_by_year": [
+        {
+          "year": 2018,
+          "works_count": 2
+        }
+      ]
+    }
+  ]
+}

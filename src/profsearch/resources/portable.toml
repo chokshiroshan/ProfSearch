@@ -1,0 +1,4 @@
+[embeddings]
+backend = "hash"
+model_name = "hash"
+dimension = 768

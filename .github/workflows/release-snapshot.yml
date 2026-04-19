@@ -1,0 +1,57 @@
+name: Release DB snapshot
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ProfSearch
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[web,embeddings]"
+
+      - name: Run full pipeline
+        env:
+          PROFSEARCH_DATA_DIR: /tmp/profsearch-snapshot
+        run: |
+          profsearch init
+          profsearch pipeline run --json-log > pipeline-log.json
+
+      - name: Package snapshot
+        run: |
+          mv /tmp/profsearch-snapshot/profsearch.db profsearch-demo-${{ github.ref_name }}.db
+          echo "DB size: $(du -h profsearch-demo-${{ github.ref_name }}.db | cut -f1)"
+          echo "Professor count: $(python -c "
+          from sqlalchemy import create_engine, text
+          e = create_engine('sqlite:///profsearch-demo-${{ github.ref_name }}.db')
+          with e.connect() as c:
+              print(c.execute(text('SELECT COUNT(*) FROM professors')).scalar())
+          ")"
+
+      - name: Upload snapshot to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: profsearch-demo-${{ github.ref_name }}.db
+          body: |
+            Pre-built ProfSearch database snapshot for `${{ github.ref_name }}`.
+
+            ## Quick start (no pipeline run needed)
+
+            ```bash
+            pipx install profsearch[web]
+            curl -L -o snapshot.db https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/profsearch-demo-${{ github.ref_name }}.db
+            PROFSEARCH_DB_PATH=snapshot.db profsearch web --read-only
+            ```
+
+            Open http://localhost:8000 and start searching.
