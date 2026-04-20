@@ -75,9 +75,13 @@ def _ensure_profile_text_columns(engine) -> None:
                 connection.execute(text("ALTER TABLE professors ADD COLUMN profile_text TEXT"))
 
 
-def initialize_database(settings: Settings):
-    settings.db_path.parent.mkdir(parents=True, exist_ok=True)
+def initialize_database(settings: Settings, read_only: bool = False):
+    if not read_only:
+        settings.db_path.parent.mkdir(parents=True, exist_ok=True)
     engine = create_sqlalchemy_engine(settings)
+    if read_only:
+        initialize_vector_support(engine, settings.database.sqlite_vec_extension, settings.embeddings.dimension)
+        return engine
     Base.metadata.create_all(engine)
     _ensure_professor_dedupe_columns(engine)
     _ensure_profile_text_columns(engine)

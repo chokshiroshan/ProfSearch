@@ -24,7 +24,8 @@ _READ_ONLY_ALLOWLIST = {"/prof/{professor_id}/draft-email"}
 @asynccontextmanager
 async def _lifespan(app: FastAPI):
     settings = get_settings()
-    initialize_database(settings)
+    read_only = os.environ.get("PROFSEARCH_READ_ONLY", "").strip() in {"1", "true", "yes"}
+    initialize_database(settings, read_only=read_only)
     app.state.settings = settings
     app.state.session_factory = create_session_factory(settings)
     app.state.encoder = EmbeddingEncoder(settings)
