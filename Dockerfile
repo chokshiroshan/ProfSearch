@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pyproject.toml .
 COPY src/ src/
 
-RUN pip install --no-cache-dir -e ".[web]"
+RUN pip install --no-cache-dir -e ".[web,embeddings]"
 
 ENV PROFSEARCH_DB_PATH=/data/profsearch.db
 
