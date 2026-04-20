@@ -40,6 +40,6 @@ dimension = 768
 batch_size = 16
 
 [search]
-result_limit = 10
+# result_limit is unset — return all results
 work_limit = 5
 candidate_pool = 250
