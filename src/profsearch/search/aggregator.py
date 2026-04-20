@@ -81,7 +81,7 @@ def rank_professors(
     encoder: EmbeddingEncoder,
     query: str,
     *,
-    result_limit: int,
+    result_limit: int | None,
     work_limit: int,
 ) -> list[SearchHit]:
     normalized_query = normalize_query_text(query)
@@ -134,4 +134,4 @@ def rank_professors(
             )
         )
     hits.sort(key=lambda item: item.score, reverse=True)
-    return hits[:result_limit]
+    return hits if result_limit is None else hits[:result_limit]

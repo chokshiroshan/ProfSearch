@@ -78,7 +78,7 @@ def search_page(
 ):
     filters = _filter_options(session)
     hits = []
-    effective_limit = result_limit if result_limit > 0 else settings.search.result_limit
+    effective_limit = result_limit if result_limit > 0 else settings.search.result_limit  # None = no limit
 
     if q.strip():
         hits = rank_professors(
@@ -129,7 +129,7 @@ def search_results(
         return RedirectResponse(url=canonical_url, status_code=307)
 
     hits = []
-    effective_limit = result_limit if result_limit > 0 else settings.search.result_limit
+    effective_limit = result_limit if result_limit > 0 else settings.search.result_limit  # None = no limit
 
     if q.strip():
         hits = rank_professors(

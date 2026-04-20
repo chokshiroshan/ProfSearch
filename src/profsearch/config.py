@@ -103,7 +103,7 @@ class EmbeddingConfig(BaseModel):
 class SearchConfig(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
-    result_limit: int = 10
+    result_limit: int | None = None
     work_limit: int = 5
     candidate_pool: int = 250
 
